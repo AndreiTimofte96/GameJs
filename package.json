@@ -1,0 +1,28 @@
+{
+  "name": "gamejs",
+  "version": "1.0.0",
+  "description": "retard game",
+  "main": "webpack.config.js",
+  "dependencies": {
+    "nodejs": "^0.0.0"
+  },
+  "devDependencies": {
+    "webpack-node-externals": "^1.6.0"
+  },
+  "scripts": {
+    "test": "no"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndreiTimofte96/GameJs.git"
+  },
+  "keywords": [
+    "dada"
+  ],
+  "author": "eo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AndreiTimofte96/GameJs/issues"
+  },
+  "homepage": "https://github.com/AndreiTimofte96/GameJs#readme"
+}

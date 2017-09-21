@@ -63,17 +63,52 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+
+function GetList(name, seconds){
+
+	
+	var jsonObj = __webpack_require__(1);
+	//var fs = require('fs');
+	var fs = __webpack_require__(3);
+
+	jsonObj[name] = seconds;
+	console.log(jsonObj);
+
+	var str = JSON.stringify(jsonObj);
+	console.log(str);
+	
+	fs.writeFile("data.json", str, finished); 
+	function finished(err){
+		console.log(err);
+	}
+    	
+}
+
+module.exports = GetList;
+
+/***/ }),
+/* 1 */
 /***/ (function(module, exports) {
+
+module.exports = {};
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
 
 //@Timi
 var sq = document.getElementById("square");
 var cont = document.getElementById("container");
 var smallSq = document.getElementById("small_square");
+var GetList = __webpack_require__ (0);
 
 
 var smallSq_Pos = {
@@ -95,6 +130,16 @@ var sq_Pos = {
 	length : parseInt(window.getComputedStyle(sq, null).getPropertyValue("height"))
 };
 
+var Keys = {
+    up: false,
+    down: false,
+    left: false,
+    right: false
+};
+
+var time0 = 0;
+var firstTime = true;
+var name;
 
 function InitSquares(){
 	
@@ -103,13 +148,11 @@ function InitSquares(){
 	smallSq.x = parseInt(window.getComputedStyle(smallSq, null).getPropertyValue("left"));
 	smallSq.y = parseInt(window.getComputedStyle(smallSq, null).getPropertyValue("top"));
 }
-
 function getRandom(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
 function CheckCollision(){
 
 	if ( ( (sq_Pos.x + sq_Pos.length >= smallSq_Pos.x) && (sq_Pos.x <= smallSq_Pos.x + smallSq_Pos.length) )
@@ -118,23 +161,20 @@ function CheckCollision(){
 
 	return false;
 }
-
 function CheckBorders(){
 
 	if ( (sq_Pos.x >= 0 &&  sq_Pos.x <= parseInt(window.getComputedStyle(cont, null).getPropertyValue("width")) - sq_Pos.length)
 	&& (sq_Pos.y >= 0 &&  sq_Pos.y <= parseInt(window.getComputedStyle(cont, null).getPropertyValue("height"))-sq_Pos.length)  )	
 		return true;
 	return false;
-}
-
-function MoveSmallSquare(){
+}function MoveSmallSquare(){
 
 	var delayMillis = 2000; //2 second
 
 	//if (delayMillis < 2200) 
 	//	delayMillis+=500;
 	
-	var zid = 80; // 80
+	var zid = 10; // 80 for high difficulty
 	while (Math.abs(randomVal.x - sq_Pos.x) < zid || Math.abs(randomVal.y - sq_Pos.y) < zid){
 
 		randomVal.x = getRandom(0, parseInt(window.getComputedStyle(cont, null).getPropertyValue("width")) - smallSq_Pos.length);
@@ -150,16 +190,6 @@ function MoveSmallSquare(){
 }
 
 
-
-var Keys = {
-    up: false,
-    down: false,
-    left: false,
-    right: false
-};
-var time0 = 0;
-var firstTime = true;
-
 window.onkeydown = function(e){
      var kc = e.keyCode;
 
@@ -167,7 +197,6 @@ window.onkeydown = function(e){
      	time0 = performance.now();
      	firstTime = false;
      }
-
      e.preventDefault();
 
      if(kc === 37) Keys.left = true;
@@ -197,6 +226,7 @@ function main(){
 function Move() {
 
 	var step = 30;
+
     if (Keys.up){
         sq_Pos.y-=step;
 		if (CheckBorders() == true){
@@ -244,18 +274,24 @@ function Move() {
 		var time = (time1 - time0) / 1000;
 		var sec = time.toPrecision(5);
 		alert("Bravo, ba, ai o maslinuta!\nTimp: " + sec + " secunde.\n");
-		//alert(t0);
+		GetList(name, sec);
+	//	location.reload();
 
-		location.reload();
 	}
 	else{
 		MoveSmallSquare();
 	}
 }
 
-//t0 = performance.now();
+name = prompt("Please enter your name");
 setInterval(main, 100);
 
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+module.exports = require("webpack-node-externals");
 
 /***/ })
 /******/ ]);
