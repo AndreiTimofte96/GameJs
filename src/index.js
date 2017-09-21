@@ -2,7 +2,6 @@
 var sq = document.getElementById("square");
 var cont = document.getElementById("container");
 var smallSq = document.getElementById("small_square");
-var GetList = require ("./getList.js");
 
 
 var smallSq_Pos = {
@@ -68,7 +67,7 @@ function CheckBorders(){
 	//if (delayMillis < 2200) 
 	//	delayMillis+=500;
 	
-	var zid = 10; // 80 for high difficulty
+	var zid = 80; // 80 for high difficulty
 	while (Math.abs(randomVal.x - sq_Pos.x) < zid || Math.abs(randomVal.y - sq_Pos.y) < zid){
 
 		randomVal.x = getRandom(0, parseInt(window.getComputedStyle(cont, null).getPropertyValue("width")) - smallSq_Pos.length);
@@ -111,7 +110,6 @@ window.onkeyup = function(e){
 
 
 function main(){
-	
 	
 	Move();
 
@@ -167,9 +165,8 @@ function Move() {
 		var time1 = performance.now();
 		var time = (time1 - time0) / 1000;
 		var sec = time.toPrecision(5);
-		alert("Bravo, ba, ai o maslinuta!\nTimp: " + sec + " secunde.\n");
-		GetList(name, sec);
-	//	location.reload();
+		alert("Bravo " + name + ", ai o maslinuta!\nTimp: " + sec + " secunde.\n");
+		location.reload();
 
 	}
 	else{
