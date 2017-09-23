@@ -4,10 +4,14 @@
   "description": "retard game",
   "main": "webpack.config.js",
   "dependencies": {
+<<<<<<< HEAD
     "body-parser": "^1.18.2",
     "express": "^4.15.4",
     "node-rest-client": "^3.1.0",
     "nodejs": "0.0.0"
+=======
+    "nodejs": "^0.0.0"
+>>>>>>> 41ddd123897be8ddb1b9741f97121715c319510e
   },
   "devDependencies": {
     "webpack-node-externals": "^1.6.0"
