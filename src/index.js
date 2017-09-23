@@ -2,6 +2,8 @@
 var sq = document.getElementById("square");
 var cont = document.getElementById("container");
 var smallSq = document.getElementById("small_square");
+var clientPost = require("./clientPost.js");
+var clientGet = require("./clientGet.js");
 
 
 var smallSq_Pos = {
@@ -67,7 +69,7 @@ function CheckBorders(){
 	//if (delayMillis < 2200) 
 	//	delayMillis+=500;
 	
-	var zid = 80; // 80 for high difficulty
+	var zid = 10; // 80 for high difficulty 100 - too damn high
 	while (Math.abs(randomVal.x - sq_Pos.x) < zid || Math.abs(randomVal.y - sq_Pos.y) < zid){
 
 		randomVal.x = getRandom(0, parseInt(window.getComputedStyle(cont, null).getPropertyValue("width")) - smallSq_Pos.length);
@@ -165,6 +167,8 @@ function Move() {
 		var time1 = performance.now();
 		var time = (time1 - time0) / 1000;
 		var sec = time.toPrecision(5);
+		clientPost(name, sec);
+		clientGet();
 		alert("Bravo " + name + ", ai o maslinuta!\nTimp: " + sec + " secunde.\n");
 		location.reload();
 
@@ -175,4 +179,7 @@ function Move() {
 }
 
 name = prompt("Please enter your name");
+
+if (name === "Diandra" || name ==="diandra" || name === "didi" || name === "Didi" || name === "DIANDRA" || name === "DIDI")
+	alert("Bun venit, printesico!");
 setInterval(main, 100);
