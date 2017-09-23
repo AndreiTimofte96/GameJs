@@ -51,6 +51,9 @@ app.get("/users", function (req, res) {
    		var str= JSON.parse(data);
       var obj = Sort(str);
       data = JSON.stringify(obj);
+      fs.writeFile("data.json", data, function Write(err){
+        console.log(err);
+      });
       res.end(data);
 	});	
 });

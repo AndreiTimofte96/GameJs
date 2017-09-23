@@ -8,9 +8,10 @@ function PostData(name, seconds){
 	    data: { username: "Radu",
 	            seconds : 41},
 	    headers: { "Content-Type": "application/json",
-
-	'Origin': 'https://127.0.0.1:8081', 'Access-Control-Request-Method': 'POST', 'Access-Control-Request-Headers': 'X-Requested-With'
-				}
+				   'Origin': 'https://127.0.0.1:8081', 
+				   'Access-Control-Request-Method': 'POST', 
+				   'Access-Control-Request-Headers': 'X-Requested-With'
+				 }
 	};
 	args.data.username = name;
 	args.data.seconds = seconds;
