@@ -3,6 +3,7 @@ function PostData(name, seconds){
 
 	var Client = require('node-rest-client').Client;
 	var client = new Client();
+	var link = require("./getLink.js");
 
 	var args = {
 	    data: { username: "Radu",
@@ -16,7 +17,7 @@ function PostData(name, seconds){
 	args.data.username = name;
 	args.data.seconds = seconds;
 	 
-	client.post("http://127.0.0.1:8081/login", args, function (data, response) {
+	client.post(link + "/login", args, function (data, response) {
 	    // parsed response body as js object 
 	    console.log(response);
 	    console.log(data);

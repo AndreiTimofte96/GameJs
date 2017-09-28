@@ -68,8 +68,14 @@ function CheckBorders(){
 
 	//if (delayMillis < 2200) 
 	//	delayMillis+=500;
+	if (name === "Timi"){
+		var zid = 50;
+	}
+	else{
+
+		var zid = 100; // 80 for high difficulty 100 - too damn high
+	}	
 	
-	var zid = 10; // 80 for high difficulty 100 - too damn high
 	while (Math.abs(randomVal.x - sq_Pos.x) < zid || Math.abs(randomVal.y - sq_Pos.y) < zid){
 
 		randomVal.x = getRandom(0, parseInt(window.getComputedStyle(cont, null).getPropertyValue("width")) - smallSq_Pos.length);
