@@ -2,7 +2,6 @@ var express = require("express");
 var bodyParser = require("body-parser")
 var app = express();
 var fs = require("fs");
-var jsonObj = require("./public/src/data.json");
 var path = require('path');
 var Sort = require("./public/src/dataSort.js");
 
@@ -16,6 +15,15 @@ app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Credentials', true);
     next();
 });
+
+function resetFile(){
+
+  var str = '{"users":[]}';
+  fs.writeFile("./public/src/data.json", str, function Write(err){
+    console.log(err);
+  });
+}
+resetFile();
 
 
 /*app.get("/", function (req, res) {
@@ -32,6 +40,7 @@ app.get("/", function (req, res) {
 
 app.post('/login', function (req, res) {
   
+  var jsonObj = require("./public/src/data.json");  
   console.log(req.body);
 
   jsonObj.users.push(req.body);
@@ -59,8 +68,12 @@ app.get("/users", function (req, res) {
   }); 
 });
 
+
+
+
 var server = app.listen(8081, function () {
 
+    //resetFile();
     var host = server.address().address;
     var port = server.address().port;
     console.log("Example app listening at http://%s:%s", host, port);

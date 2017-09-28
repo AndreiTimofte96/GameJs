@@ -10,7 +10,7 @@
     "nodejs": "0.0.0"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node server.js"
   },
   "devDependencies": {
     "webpack-node-externals": "^1.6.0"
