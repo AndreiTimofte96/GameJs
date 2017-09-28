@@ -5,6 +5,8 @@ var fs = require("fs");
 var path = require('path');
 var Sort = require("./public/src/dataSort.js");
 
+var globalData;
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use('/src',express.static( 'public/src'));
@@ -23,7 +25,7 @@ function resetFile(){
     console.log(err);
   });
 }
-resetFile();
+
 
 
 /*app.get("/", function (req, res) {
@@ -46,13 +48,13 @@ app.post('/login', function (req, res) {
   jsonObj.users.push(req.body);
   
   if (jsonObj.users.length > 1){
-    jsonObj = Sort(jsonObj);
+    globalData = Sort(jsonObj);
   }
   
-  var str = JSON.stringify(jsonObj);
+  /*var str = JSON.stringify(jsonObj);
   fs.writeFile("./public/src/data.json", str, function Write(err){
     console.log(err);
-  });
+  });*/
   res.send(req.body);
   res.end();
   
@@ -60,20 +62,14 @@ app.post('/login', function (req, res) {
 
 app.get("/users", function (req, res) {
 
-  fs.readFile("./public/src/data.json", function Read(err, data) {
-      if (err) {
-          throw err;
-      }
-      res.end(data);
-  }); 
+  //var jsonObj = require("./public/src/data.json");
+  var str = JSON.stringify(globalData);
+  res.end(str);
 });
-
-
-
 
 var server = app.listen(8081, function () {
 
-    //resetFile();
+    resetFile();
     var host = server.address().address;
     var port = server.address().port;
     console.log("Example app listening at http://%s:%s", host, port);
