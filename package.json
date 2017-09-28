@@ -1,6 +1,6 @@
 {
   "name": "gamejs",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "retard game",
   "main": "webpack.config.js",
   "dependencies": {

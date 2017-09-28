@@ -4,7 +4,7 @@ var app = express();
 var fs = require("fs");
 var path = require('path');
 var Sort = require("./public/src/dataSort.js");
-
+var jsonObj = {"users":[]};
 var globalData;
 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -17,16 +17,6 @@ app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Credentials', true);
     next();
 });
-
-function resetFile(){
-
-  var str = '{"users":[]}';
-  fs.writeFile("./public/src/data.json", str, function Write(err){
-    console.log(err);
-  });
-}
-
-
 
 /*app.get("/", function (req, res) {
 
@@ -42,13 +32,11 @@ app.get("/", function (req, res) {
 
 app.post('/login', function (req, res) {
   
-  var jsonObj = require("./public/src/data.json");  
   console.log(req.body);
-
   jsonObj.users.push(req.body);
   
   if (jsonObj.users.length > 1){
-    globalData = Sort(jsonObj);
+    jsonObj = Sort(jsonObj);
   }
   
   /*var str = JSON.stringify(jsonObj);
@@ -61,15 +49,13 @@ app.post('/login', function (req, res) {
 });
 
 app.get("/users", function (req, res) {
-
-  //var jsonObj = require("./public/src/data.json");
-  var str = JSON.stringify(globalData);
+  var str = JSON.stringify(jsonObj);
   res.end(str);
 });
 
-var server = app.listen(8081, function () {
 
-    resetFile();
+var server = app.listen(process.env.PORT || 8081, function () {
+
     var host = server.address().address;
     var port = server.address().port;
     console.log("Example app listening at http://%s:%s", host, port);
