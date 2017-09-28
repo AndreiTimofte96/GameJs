@@ -4,7 +4,6 @@ var app = express();
 var fs = require("fs");
 var path = require('path');
 var Sort = require("./public/src/dataSort.js");
-var link = require("./public/src/getLink.js");
 var jsonObj = {"users":[]};
 var globalData;
 
@@ -31,7 +30,7 @@ app.get("/", function (req, res) {
   //res.sendFile(path.resolve("../index.html"));
 });
 
-app.post(link + '/login', function (req, res) {
+app.post('/login', function (req, res) {
   
   console.log(req.body);
   jsonObj.users.push(req.body);
@@ -49,7 +48,7 @@ app.post(link + '/login', function (req, res) {
   
 });
 
-app.get(link + "/users", function (req, res) {
+app.get("/users", function (req, res) {
   var str = JSON.stringify(jsonObj);
   res.end(str);
 });
